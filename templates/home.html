@@ -1,0 +1,13 @@
+{% load i18n %}
+{% load socialaccount %}
+{% load account %}
+{% load crispy_forms_tags %}
+
+
+<h1>welcome to home</h1>
+<hr>
+{% if user.is_authenticated %}
+<a href="{% url 'account_logout' %}">logout</a>
+{% else %}
+<a href="{% url 'account_signup' %}">login</a>
+{% endif %}
