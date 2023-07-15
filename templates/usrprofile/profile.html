@@ -1,0 +1,51 @@
+{% load static %}
+<div class="col-md-4">
+    <div class="profile-img">
+        {% if user.profile.profile_pic %}
+          
+        <img id="image" src="{{ user.profile.profile_pic.url }}" alt="{{user.username}}" height="150" width="150"/>
+        {% else %}
+        <img id="image" src="{% static 'images/default.jpg' %}" alt="{{user.username}}" height="150" width="150"/>
+        {% endif %}
+    </div>
+</div>
+    
+    {% if user_form.errors %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div id="form_errors">
+                {% for key, value in user_form.errors.items %}
+                    <strong>{{ value }}</strong>
+                {% endfor %}
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+    <div class="form-content">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-md-5"> 
+                    <div class="form-group">
+                        <label class="small mb-1">Username:</label>
+                            {{ user_form.username }}
+                        <label class="small mb-1">Email:</label>
+                            {{ user_form.email }}
+                    </div>
+                    <div class="form-group">
+                        <!-- {% comment %} <a href="{% url 'password_change' %}">Change Password</a> {% endcomment %} -->
+                        <hr>
+                        <label class="small mb-1">Change Avatar:</label>
+                        {{ profile_form.profile_pic }}
+                    </div>
+                    <label class="small mb-1">first name:</label> {{ profile_form.first_name }} <br>
+                    <label class="small mb-1">last name:</label> {{ profile_form.last_name }} <br>
+                    <label class="small mb-1">phone:</label> {{ profile_form.phone_number }} <br>
+                </div> 
+            </div>
+            <br><br>
+            <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>
+            <button type="reset" class="btn btn-dark btn-lg">Reset</button>
+        </form>
+    </div>
