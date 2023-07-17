@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #my apps
     'users',
     'usrprof',
+    'stuff',
     #django all auth
     'allauth',
     'allauth.account',
@@ -138,14 +139,18 @@ MEDIA_ROOT = BASE_DIR / 'images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
 LOGIN_REDIRECT_URL = "home"
-# LOGOUT_REDIRECT_URL = "account_login"
+
+
+
 AUTHENTICATION_BACKENDS = [
 
-    # Needed to login by username in Django admin, regardless of `allauth`
+    
     'django.contrib.auth.backends.ModelBackend',
 
-    # `allauth` specific authentication methods, such as login by e-mail
+   
     'allauth.account.auth_backends.AuthenticationBackend',
     
 ]
@@ -166,8 +171,6 @@ SOCIALACCOUNT_PROVIDERS = {
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = ("username_email")
-ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 SOCIALACCOUNT_QUERY_EMAIL = True
-ACCOUNT_LOGOUT_ON_GET= True
 ACCOUNT_UNIQUE_EMAIL = True
