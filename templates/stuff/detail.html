@@ -1,33 +1,3 @@
-<h1>{{stuff.name}}</h1>
+<h1>{{item.name}}</h1>
+<p>{{ item.discription }}</p>
 
-{% if stuff.image %}
-<img id="image" src="{{ stuff.image.url }}" alt="" height="150" width="150"/>
-{% else %}
-<img id="image" src="{ images/default.jpg }" alt="" height="150" width="150"/>
-{% endif %}
-
-  <h4>in {{stuff.Tag}} | {{stuff.date_added}} | {{stuff.feature}}| {{stuff.name}}</h4> 
-
-{{stuff.description }} <hr>
-{{stuff.price }}
-
-<h2> Comments </h2>
-
-     {% if user.is_authenticated %}
-      <form action="" method="POST" id="main_form" class="comment_form">
-         <div>
-             <label for="comment">Type Comment here</label>
-            {{ comment_form.content }} {% csrf_token %} <input type="submit" value="Post"></div>
-         </div>
-      </form>
-      {% else %} <h2>You need to Login to comment</h2> 
-      {% endif %}
-
-      {% for comment in comments %}
-         {% if comment.is_parent %}
-         <h3> <b>{{ comment.author }} : </b> {{ comment.content }}</h3> 
-         {% endif %} 
-         {% for replies in comment.children %}
-            <h3>&nbsp; &nbsp; &nbsp; <b>{{ comment.author }} : </b> {{ replies.content }}</h3>
-         {% endfor %}
-      {% endfor %}

@@ -14,6 +14,11 @@
 <a href="{% url 'account_signup' %}">signup</a>
 {% endif %}
 
-<a href="{% url 'profile' %}">profile</a>
+<a href="{% url 'profile' %}">profile</a> <hr>
 
-<a href="{% url 'stuff_detail' stuff.id %}">{{stuff.name}}</a>
+
+
+{% for item in items %}
+  <a href="{% url 'item_detail' item.id %}">{{ item.name }}</a>
+  
+{% endfor %}

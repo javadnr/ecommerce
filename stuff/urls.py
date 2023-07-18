@@ -1,5 +1,8 @@
 from django.urls import path
-from .views import StuffDetail
+from .views import ItemListView, ItemDetailView 
+
 urlpatterns = [
-    path('detail/<int:pk>/',StuffDetail.as_view(),name='stuff_detail'),
+    path('',ItemListView.as_view(),name='home'),
+    path('detail/<int:pk>/',ItemDetailView.as_view(),name='item_detail'),
+    
 ]
