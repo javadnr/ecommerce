@@ -1,3 +1,10 @@
 <h1>{{item.name}}</h1>
 <p>{{ item.discription }}</p>
+{% if item.image %}
 
+<img id="image" src="{{ item.image.url }}" alt="{{user.username}}" height="150" width="150"/> <br>
+  
+{% endif %}
+
+<a href="{% url 'update_item' item.id %}">update</a>
+<a href="{% url 'delete' item.id %}">delete</a> 

@@ -1,5 +1,6 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
 from .models import Item
+from django.urls import reverse_lazy
 
 class ItemListView(ListView):
     model = Item
@@ -11,3 +12,18 @@ class ItemDetailView(DetailView):
     template_name = 'stuff/detail.html'
     context_object_name = 'item'
     
+class ItemDeleteView(DeleteView):
+    model = Item
+    template_name = 'stuff/delete.html'
+    success_url = reverse_lazy('list')
+    
+class ItemCreateView(CreateView):
+    model = Item
+    template_name = 'stuff/create_item.html'
+    success_url = reverse_lazy('list')
+    fields = '__all__'
+    
+class ItemUpdateView(UpdateView):
+    model = Item
+    template_name = 'stuff/update_item.html'
+    fields = '__all__'
