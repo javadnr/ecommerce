@@ -2,6 +2,9 @@ from django.views.generic import ListView, DetailView, DeleteView, UpdateView, C
 from .models import Item
 from django.urls import reverse_lazy
 
+from django.shortcuts import redirect
+
+
 class ItemListView(ListView):
     model = Item
     template_name = 'stuff/list.html'
@@ -27,3 +30,8 @@ class ItemUpdateView(UpdateView):
     model = Item
     template_name = 'stuff/update_item.html'
     fields = '__all__'
+    
+
+
+ 
+    

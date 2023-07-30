@@ -7,5 +7,6 @@ urlpatterns = [
     path('delete/<int:pk>/',ItemDeleteView.as_view(),name='delete'),
     path('create_item',ItemCreateView.as_view(),name='create_item'),
     path('update/<int:pk>',ItemUpdateView.as_view(),name='update_item'),
+
     
 ]

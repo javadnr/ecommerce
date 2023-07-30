@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     #crispy forms
     'crispy_forms',
+    #comment app
+    'comment.apps.CommentConfig',
 ]
 SITE_ID = 1
 
@@ -141,7 +143,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "list"
 
 
 
