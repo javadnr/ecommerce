@@ -1,6 +1,9 @@
-<form action="" method="post">
+{% extends 'base.html' %}
+{% block content %}
+<form class="mb-3 container" action="" method="post">
     <h1>create an item</h1>
     {% csrf_token %}
     {{form.as_p}}
     <button type="submit">create</button>
 </form>
+{% endblock content %}

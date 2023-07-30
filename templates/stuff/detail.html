@@ -1,17 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  
+
 {% load comment_tags %}
+<div>
+    <h1>{{product.name}}</h1>
+    <p>{{ product.discription }}</p>
+    <h3>{{product.price}}</h3>
+</div>
+{% if product.image %}
 
-<h1>{{item.name}}</h1>
-<p>{{ item.discription }}</p>
-<h3>{{item.price}}</h3>
-{% if item.image %}
-
-<img id="image" src="{{ item.image.url }}" alt="{{user.username}}" height="150" width="150"/> <br>
+<img id="image" src="{{ product.image.url }}" alt="{{user.username}}" height="150" width="150"/> <br>
   
 {% endif %}
 
-<a href="{% url 'update_item' item.id %}">update</a>
-<a href="{% url 'delete' item.id %}">delete</a> 
+<a href="{% url 'update_item' product.id %}">update</a><br>
+<a href="{% url 'delete' product.id %}">delete</a> <br>
+
 
 <br>
 
-{% render_comments request item settings_slug='default-config' %}
+{% render_comments request product settings_slug='default-config' %}
+{% endblock content %}

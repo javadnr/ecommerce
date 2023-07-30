@@ -3,11 +3,11 @@ from django.urls import reverse
 from comment.models import Comment
 from django.contrib.contenttypes.fields import GenericRelation
 
-class Item(models.Model):
-    name = models.CharField(max_length=200)
+class Product(models.Model):
+    name = models.CharField(max_length=255)
     discription = models.TextField()
-    image = models.ImageField(upload_to='image/',null=True, blank = True, default='default.jpg')
-    price =models.IntegerField()
+    image = models.ImageField(upload_to='products/',null=True, blank = True, default='default.jpg')
+    price =models.FloatField()
     date_added = models.DateTimeField(auto_now_add=True)
     comments = GenericRelation(Comment)
     
