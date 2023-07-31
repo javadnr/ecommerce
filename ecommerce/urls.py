@@ -25,5 +25,7 @@ urlpatterns = [
     path('profile/',include('usrprof.urls')),
     path('accounts/', include('allauth.urls')),
     path('comment/', include('comment.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/',include('serialize.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'usrprof',
     'stuff',
+    'serialize',
     #django all auth
     'allauth',
     'allauth.account',
@@ -51,8 +52,11 @@ INSTALLED_APPS = [
     'crispy_forms',
     #comment app
     'comment.apps.CommentConfig',
-    
+    #add to cart app
     'cart',
+    #rest framework
+    'rest_framework',
+    
 ]
 SITE_ID = 1
 
@@ -181,3 +185,10 @@ ACCOUNT_AUTHENTICATION_METHOD = ("username_email")
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_UNIQUE_EMAIL = True
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
