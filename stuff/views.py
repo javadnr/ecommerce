@@ -35,7 +35,7 @@ class ItemUpdateView(UpdateView):
     
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="account_login")
 def cart_add(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
@@ -43,7 +43,7 @@ def cart_add(request, id):
     return redirect("list")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="account_login")
 def item_clear(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
@@ -51,7 +51,7 @@ def item_clear(request, id):
     return redirect("cart_detail")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="account_login")
 def item_increment(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
@@ -59,7 +59,7 @@ def item_increment(request, id):
     return redirect("cart_detail")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="account_login")
 def item_decrement(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
@@ -67,13 +67,21 @@ def item_decrement(request, id):
     return redirect("cart_detail")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="account_login")
 def cart_clear(request):
     cart = Cart(request)
     cart.clear()
     return redirect("list")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="account_login")
 def cart_detail(request):
     return render(request, 'stuff/cart_detail.html')
+
+def searchview(request):
+    if request.method == "GET":
+        searched = request.GET['searched']
+        products = Product.objects.filter(name__icontains = searched)
+        return render(request, "stuff/search.html",{'searched' :searched , 'products': products} )
+    else: 
+        return render(request, "stuff/search.html",{'searched' :searched} )
