@@ -1,10 +1,11 @@
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
-from .models import Product
+from .models import Product, comment
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
+from .forms import CommentForm
 
 
 class ItemListView(ListView):
@@ -32,7 +33,20 @@ class ItemUpdateView(UpdateView):
     model = Product
     template_name = 'stuff/update_item.html'
     fields = '__all__'
+
+class CommentView(CreateView):
+    model = comment
+    template_name = 'stuff/comment.html'
+    form_class = CommentForm
+    success_url = reverse_lazy('list')
+    ordering = ['-date_added'] 
     
+
+        
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 
 @login_required(login_url="account_login")

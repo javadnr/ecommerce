@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     #crispy forms
     'crispy_forms',
     #comment app
-    'comment.apps.CommentConfig',
+    
     #add to cart app
     'cart',
     #rest framework

@@ -2,7 +2,6 @@
 {% block content %}
   
 
-{% load comment_tags %}
 <div>
     <h1>{{product.name}}</h1>
     <p>{{ product.discription }}</p>
@@ -19,6 +18,33 @@
 
 
 <br>
+    {% if not product.comments.all %}
+    No comments yet... <a href="{% url 'comment' product.id %}">add comment</a>
+    {% else %}
+    <a href="{% url 'comment' product.id %}">add comment</a>
+    {% for comment in product.comments.all %}
+        <strong>
+        <br> {{comment.author}} - {{comment.date_added}} <br>
+            {{comment.body}}
+        </strong>
+    {% endfor %}
+    {% endif %}
 
-{% render_comments request product settings_slug='default-config' %}
+{% if not user.is_authenticated %}
+{% if not product.comments.all %}
+No comments yet... <a href="{% url 'account_login'  %}">add comment</a>
+{% else %}
+<a href="{% url 'account_login'  %}">add comment</a>
+{% for comment in product.comments.all %}
+  <strong>
+    <br> {{comment.author}} - {{comment.date_added}} <br>
+      <p>{{comment.body}}</p>
+  </strong>
+{% endfor %}
+{% endif %}
+{% endif %}
+</div> 
+  
+
+
 {% endblock content %}

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ItemListView, ItemDetailView, ItemDeleteView,ItemCreateView, ItemUpdateView
+from .views import ItemListView, ItemDetailView, ItemDeleteView,ItemCreateView, ItemUpdateView, CommentView
 from . import views
 
 urlpatterns = [
@@ -15,5 +15,6 @@ urlpatterns = [
     path('cart/cart_clear/', views.cart_clear, name='cart_clear'),
     path('cart/cart-detail/',views.cart_detail,name='cart_detail'),
     path('serach/',views.searchview,name='search'),
+    path('<int:pk>/comment/',CommentView.as_view(), name="comment"),
     
 ]

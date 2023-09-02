@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from comment.models import Comment
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericRelation
 
 class Product(models.Model):
@@ -9,7 +9,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/',null=True, blank = True, default='default.jpg')
     price =models.FloatField()
     date_added = models.DateTimeField(auto_now_add=True)
-    comments = GenericRelation(Comment)
+
     
     def __str__(self):
         return self.name
@@ -19,4 +19,8 @@ class Product(models.Model):
     
 
 
-
+class comment(models.Model):
+    author = models.ForeignKey(User , on_delete=models.CASCADE)
+    post = models.ForeignKey(Product,related_name='comments', on_delete=models.CASCADE)
+    body = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
