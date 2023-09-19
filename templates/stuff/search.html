@@ -7,7 +7,7 @@
 <h1>you searched for {{ searched }}</h1>
 {% for product in products %}
 
-  <a href="{% url 'item_detail' product.slug %}">{{ product}}</a>  <br>
+  <a href="{% url 'item_detail' product.id %}">{{ product}}</a>  <br>
     
   {% endfor %}
 {% else %}

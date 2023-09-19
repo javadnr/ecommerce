@@ -1,10 +1,9 @@
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
 from .models import Product, comment
 from django.urls import reverse_lazy
-from django.shortcuts import redirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from cart.cart import Cart
+
 from .forms import CommentForm
 
 
@@ -32,7 +31,7 @@ class ItemCreateView(CreateView):
 class ItemUpdateView(UpdateView):
     model = Product
     template_name = 'stuff/update_item.html'
-    fields = '__all__'
+    fields = ['name', 'discription','image','price']
 
 class CommentView(CreateView):
     model = comment
@@ -48,49 +47,6 @@ class CommentView(CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-
-@login_required(login_url="account_login")
-def cart_add(request, id):
-    cart = Cart(request)
-    product = Product.objects.get(id=id)
-    cart.add(product=product)
-    return redirect("list")
-
-
-@login_required(login_url="account_login")
-def item_clear(request, id):
-    cart = Cart(request)
-    product = Product.objects.get(id=id)
-    cart.remove(product)
-    return redirect("cart_detail")
-
-
-@login_required(login_url="account_login")
-def item_increment(request, id):
-    cart = Cart(request)
-    product = Product.objects.get(id=id)
-    cart.add(product=product)
-    return redirect("cart_detail")
-
-
-@login_required(login_url="account_login")
-def item_decrement(request, id):
-    cart = Cart(request)
-    product = Product.objects.get(id=id)
-    cart.decrement(product=product)
-    return redirect("cart_detail")
-
-
-@login_required(login_url="account_login")
-def cart_clear(request):
-    cart = Cart(request)
-    cart.clear()
-    return redirect("list")
-
-
-@login_required(login_url="account_login")
-def cart_detail(request):
-    return render(request, 'stuff/cart_detail.html')
 
 def searchview(request):
     if request.method == "GET":

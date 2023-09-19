@@ -2,7 +2,7 @@
 {% block content %}
   
 
-<form action="" method="post">
+<form action="" enctype="multipart/form-data" method="post">
     <h1>update the item</h1>
     {% csrf_token %}
     {{form.as_p}}

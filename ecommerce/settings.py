@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     #comment app
     
     #add to cart app
-    'cart',
+
     #rest framework
     'rest_framework',
     

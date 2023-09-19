@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
   
-
+<div class="container">
 <div>
     <h1>{{product.name}}</h1>
     <p>{{ product.discription }}</p>
@@ -10,18 +11,21 @@
 {% if product.image %}
 
 <img id="image" src="{{ product.image.url }}" alt="{{user.username}}" height="150" width="150"/> <br>
-  
+{% else %}
+
+  <img src="{% static 'img/basket.png' %}" alt="" height="150" width="150"> <br>
+
 {% endif %}
 
-<a href="{% url 'update_item' product.slug %}">update</a><br>
-<a href="{% url 'delete' product.slug %}">delete</a> <br>
+<a href="{% url 'update_item' product.id %}">update</a><br>
+<a href="{% url 'delete' product.id %}">delete</a> <br>
 
 
 <br>
     {% if not product.comments.all %}
-    No comments yet... <a href="{% url 'comment' product.slug %}">add comment</a>
+    No comments yet... <a href="{% url 'comment' product.id %}">add comment</a>
     {% else %}
-    <a href="{% url 'comment' product.slug %}">add comment</a>
+    <a href="{% url 'comment' product.id %}">add comment</a>
     {% for comment in product.comments.all %}
         <strong>
         <br> {{comment.author}} - {{comment.date_added}} <br>
@@ -44,7 +48,7 @@ No comments yet... <a href="{% url 'account_login'  %}">add comment</a>
 {% endif %}
 {% endif %}
 </div> 
-  
+</div>
 
 
 {% endblock content %}

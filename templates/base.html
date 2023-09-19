@@ -25,17 +25,21 @@
               </li>
               <a class="nav-link active" aria-current="page" href="{% url 'account_signup' %}">signup</a>
               {% endif %}
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-            </li>
+      
+            
           </ul>
+          
+          
+          
           <form class="d-flex" role="search" method="GET" action="{% url 'search' %}">
             {% csrf_token %}
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched">
           <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
+        
         </div>
       </div>
+      
     </nav>
     {% block content %}
       

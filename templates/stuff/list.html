@@ -12,8 +12,7 @@
     <hr>
   {% for product in products %}
     
-    <a href="{% url 'item_detail' product.slug %}">{{ product.name }}</a> |
-    <a href="{% url 'cart_add' product.id %}">Add To Cart</a><br>
+    <a href="{% url 'item_detail' product.id %}">{{ product.name }}</a> |
 
   {% endfor %}
 </div>
