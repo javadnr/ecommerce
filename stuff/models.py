@@ -6,9 +6,8 @@ from django.contrib.auth.models import User
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    
     discription = models.TextField()
-    image = models.ImageField(upload_to='products/',null=True, blank = True, default='default.jpg')
+    image = models.ImageField(upload_to='products/',null=True, blank = True, default='basket.png')
     price =models.FloatField()
     date_added = models.DateTimeField(auto_now_add=True)
     

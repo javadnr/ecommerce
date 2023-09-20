@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+<div class="container">
 <div class="col-md-4">
     <div class="profile-img">
         {% if user.profile.profile_pic %}
@@ -53,4 +54,5 @@
             <button type="reset" class="btn btn-dark btn-lg">Reset</button>
         </form>
     </div>
+</div>
     {% endblock content %}

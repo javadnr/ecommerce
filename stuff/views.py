@@ -11,6 +11,7 @@ class ItemListView(ListView):
     model = Product
     template_name = 'stuff/list.html'
     context_object_name = 'products'
+    ordering = ['-date_added'] 
     
 class ItemDetailView(DetailView):
     model = Product

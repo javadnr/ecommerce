@@ -20,25 +20,29 @@
 <a href="{% url 'update_item' product.id %}">update</a><br>
 <a href="{% url 'delete' product.id %}">delete</a> <br>
 
-
+  {% if user.is_authenticated %}
+    
+  
 <br>
     {% if not product.comments.all %}
-    No comments yet... <a href="{% url 'comment' product.id %}">add comment</a>
+      No comments yet... <a href="{% url 'comment' product.id %}">add comment</a>
     {% else %}
-    <a href="{% url 'comment' product.id %}">add comment</a>
+      <a href="{% url 'comment' product.id %}">add comment</a>
     {% for comment in product.comments.all %}
         <strong>
-        <br> {{comment.author}} - {{comment.date_added}} <br>
-            {{comment.body}}
+          <br> {{comment.author}} - {{comment.date_added}} <br>
+                {{comment.body}}
         </strong>
     {% endfor %}
     {% endif %}
+    {% endif %}
+
 
 {% if not user.is_authenticated %}
 {% if not product.comments.all %}
-No comments yet... <a href="{% url 'account_login'  %}">add comment</a>
+  No comments yet... <a href="{% url 'account_login'  %}">add comment</a>
 {% else %}
-<a href="{% url 'account_login'  %}">add comment</a>
+  <a href="{% url 'account_login'  %}">add comment</a>
 {% for comment in product.comments.all %}
   <strong>
     <br> {{comment.author}} - {{comment.date_added}} <br>
