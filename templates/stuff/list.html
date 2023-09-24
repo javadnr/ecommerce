@@ -14,6 +14,11 @@
 <a href="{% url 'create_item' %}">new item</a>
 
 {% endif %}
+
+
+<a href="{% url 'cart' %}">cart</a>
+
+
   <h1>Shopping happy</h1>
     <hr>
   {% for product in products %}
@@ -36,7 +41,7 @@
 
         </div>
         <div class="col">
-          {{ product.price }}
+          {{ product.price }} <a href="{% url 'add-to-cart' product.id %}">add to cart</a>
         </div>
       </div>
     </div><hr>

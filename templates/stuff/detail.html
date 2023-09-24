@@ -16,6 +16,8 @@
   <img src="{% static 'img/basket.png' %}" alt="" height="150" width="150"> <br>
 
 {% endif %}
+<a href="{% url 'add-to-cart' product.id %}">add to cart</a><br>
+
 
 <a href="{% url 'update_item' product.id %}">update</a><br>
 <a href="{% url 'delete' product.id %}">delete</a> <br>

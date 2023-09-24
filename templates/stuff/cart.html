@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <p>you have <br>
+        {% for cart_item in cart_items %} 
+        {{cart_item.quantity}} {{cart_item.product.name}} <br>
+        {% endfor %}
+        in your cart
+    </p>
+</div>
+
+
+
+{% endblock content %}

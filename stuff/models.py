@@ -24,12 +24,26 @@ class Product(models.Model):
 
 
 
-
-
+class Cart(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product,through='CartItem')
+    
+    def __str__(self):
+        return f'cart for {self.user.username}'
+    
+    
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart,on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,related_name='cartitem',on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    
+    def __str__(self):
+        return f'{self.quantity} x {self.product.name} in {self.cart}'
+    
 
 
 class comment(models.Model):
     author = models.ForeignKey(User , on_delete=models.CASCADE)
     post = models.ForeignKey(Product,related_name='comments', on_delete=models.CASCADE)
-    body = models.TextField()
+    body = models.TextField(null=True, blank = True)
     date_added = models.DateTimeField(auto_now_add=True)

@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
-from .models import Product, comment
+from .models import Product, comment, Cart, CartItem
 from django.urls import reverse_lazy
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from .forms import CommentForm
@@ -41,8 +41,7 @@ class CommentView(CreateView):
     success_url = reverse_lazy('list')
     ordering = ['-date_added'] 
     
-
-        
+           
     def form_valid(self, form):
         form.instance.post_id = self.kwargs['pk']
         form.instance.author = self.request.user
@@ -56,3 +55,35 @@ def searchview(request):
         return render(request, "stuff/search.html",{'searched' :searched , 'products': products} )
     else: 
         return render(request, "stuff/search.html",{'searched' :searched} )
+
+
+def add_to_cart(request, product_id):
+    product = Product.objects.get(id=product_id)
+    cart, created = Cart.objects.get_or_create(user=request.user)
+    cart_item, item_created = CartItem.objects.get_or_create(cart=cart,product=product)
+    
+    if not item_created:
+        cart_item.quantity+=1
+        cart_item.save()
+        
+    return redirect('cart')
+
+
+def view_cart(request):
+    cart = get_object_or_404(Cart,user=request.user)
+    cart_items = cart.cartitem_set.all()
+    
+    return render(request, 'stuff/cart.html',{'cart_items':cart_items})
+
+# def update_cart(request,cart_item_id):
+#     cart_item = CartItem.objects.get(id=cart_item_id)
+#     quantity = int(request.POST.get('quantity'))
+    
+#     if quantity > 0 :
+#         cart_item.quantity = quantity
+#         cart_item.save()
+#     else:
+#         cart_item.delete()
+        
+#     return redirect('cart')
+
