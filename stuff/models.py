@@ -42,7 +42,7 @@ class CartItem(models.Model):
     
 
 
-class comment(models.Model):
+class Comment(models.Model):
     author = models.ForeignKey(User , on_delete=models.CASCADE)
     post = models.ForeignKey(Product,related_name='comments', on_delete=models.CASCADE)
     body = models.TextField(null=True, blank = True)

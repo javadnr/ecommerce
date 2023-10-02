@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Product, comment,Cart, CartItem
+from .models import Product, Comment,Cart, CartItem
 # Register your models here.
 
 class CommentInline(admin.TabularInline):
-    model = comment
+    model = Comment
     
     
 class ProductAdmin(admin.ModelAdmin):

@@ -1,10 +1,10 @@
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
-from .models import Product, comment, Cart, CartItem
+from .models import Product, Comment, Cart, CartItem
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from .forms import CommentForm
+from .forms import CommentForm,CartItemForm
 
 
 class ItemListView(ListView):
@@ -35,7 +35,7 @@ class ItemUpdateView(UpdateView):
     fields = ['name', 'discription','image','price']
 
 class CommentView(CreateView):
-    model = comment
+    model = Comment
     template_name = 'stuff/comment.html'
     form_class = CommentForm
     success_url = reverse_lazy('list')
@@ -46,6 +46,18 @@ class CommentView(CreateView):
         form.instance.post_id = self.kwargs['pk']
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+# def comment(request,pk):
+#     product = Product.objects.get(id=pk)
+#     form = CommentForm(request.POST)
+     
+#     if form.is_valid():
+#         comment = form.save(commit=False)
+#         comment.post = product
+#         comment.author = request.user
+#         comment.save()
+        
+#     return render(request,'stuff/comment.html')
 
 
 def searchview(request):
@@ -75,15 +87,21 @@ def view_cart(request):
     
     return render(request, 'stuff/cart.html',{'cart_items':cart_items})
 
-# def update_cart(request,cart_item_id):
-#     cart_item = CartItem.objects.get(id=cart_item_id)
-#     quantity = int(request.POST.get('quantity'))
+def update_cart(request,cart_item_id):
+    cart_item = CartItem.objects.get(id=cart_item_id)
+    quantity = int(request.POST.get('quantity'))
     
-#     if quantity > 0 :
-#         cart_item.quantity = quantity
-#         cart_item.save()
-#     else:
-#         cart_item.delete()
+    if quantity > 0 :
+        cart_item.quantity = quantity
+        cart_item.save()
+    else:
+        cart_item.delete()
         
-#     return redirect('cart')
-
+    return redirect('cart')
+# def update_cart(request,pk):
+#     item = CartItem.object.get(pk=pk)
+#     if request.method == 'POST':
+#         form = CartItemForm(request.POST,instance=item)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('cart')
