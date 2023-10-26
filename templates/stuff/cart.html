@@ -4,13 +4,14 @@
     <p>you have <br>
         {% for cart_item in cart_items %} 
         {{cart_item.quantity}} {{cart_item.product.name}} 
+        in your cart <br>
+        
         <form action="{% url 'update_cart' cart_item.id %}" method="post">
             {% csrf_token %}
             <input type="number" name="quantity" id="" value="{{cart_item.quantity}}" min="0">
             <button type="submit">update</button>
-        </form>
+        </form> <br>
         {% endfor %}
-        in your cart
     </p>
 </div>
 

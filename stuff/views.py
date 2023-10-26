@@ -98,10 +98,4 @@ def update_cart(request,cart_item_id):
         cart_item.delete()
         
     return redirect('cart')
-# def update_cart(request,pk):
-#     item = CartItem.object.get(pk=pk)
-#     if request.method == 'POST':
-#         form = CartItemForm(request.POST,instance=item)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('cart')
+    
