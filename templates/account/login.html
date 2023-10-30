@@ -1,14 +1,14 @@
 {% load i18n %}
 {% load socialaccount %}
 {% load account %}
+{% load crispy_forms_tags %}
 
 
-<div class="container">
 
     <h1>LOGIN</h1>
     <form action="" method="post">
         {% csrf_token %}
-        {{form.as_p}}
+        {{form|crispy}}
         <a href="{% url 'account_reset_password' %}">forget your password?</a> <br>
 
         <button class="btn btn-secondary" type="submit" >Log In</button>

@@ -5,22 +5,26 @@
 
 
 <section class="py-5">
-  <div class="container px-4 px-lg-5 my-5">
+  <div class="container px-4 px-lg-5 my-5 ">
       <div class="row gx-4 gx-lg-5 align-items-center">
-          <div class="col-md-6">
+          <div class="col-md-6 ">
             {% if product.image %}
 
               <img id="image" class="card-img-top mb-5 mb-md-0" src="{{ product.image.url }}" alt="{{user.username}}" > <br>
             {% else %}
 
-            <img src="{% static 'img/basket.png' %}" class="card-img-top mb-5 mb-md-0" alt="" > <br>
+            <img src="{% static 'img/basket.png' %}" class="card-img-top mb-5 mb-md-0 " alt="" > <br>
 
             {% endif %}
 
           </div>
           <div class="col-md-6">
-              <div class="small mb-1">SKU: BST-498</div>
-              <h1 class="display-5 fw-bolder">{{product.name}}</h1>
+              <h1 class="display-5 fw-bolder">{{product.name}} {% if user.is_superuser %}
+
+                <a class="btn btn-danger" href="{% url 'update_item' product.id %}">update</a>
+                <a class="btn btn-danger" href="{% url 'delete' product.id %}">delete</a>
+                {%endif%}</h1>
+              
               <div class="fs-5 mb-5">
                   <!-- <span class="text-decoration-line-through">$45.00</span> -->
                   <span>${{product.price}}</span>
@@ -29,53 +33,118 @@
               <div class="d-flex">  
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                   <div class="text-center"><a class="btn btn-outline-secondary mt-auto" href="{% url 'add-to-cart' product.id %}">add to cart</a></div>
-  {% if user.is_authenticated %}
-
-  <a href="{% url 'update_item' product.id %}">update</a><br>
-  <a href="{% url 'delete' product.id %}">delete</a> <br>
-  {%endif%}
+                    
               </div>
-              </div>
-          </div>
-      </div>
-
-  
-
-
-  {% if user.is_authenticated %}
-    
-  
-<br>
-    {% if not product.comments.all %}
-      No comments yet... <a href="{% url 'comment' product.id %}">add comment</a>
-    {% else %}
-      <a href="{% url 'comment' product.id %}">add comment</a>
-    {% for comment in product.comments.all %}
-        <strong>
-          <br> {{comment.author}} - {{comment.date_added}} <br>
-                {{comment.body}}
-        </strong>
-    {% endfor %}
-    {% endif %}
-    {% endif %}
-
-
-{% if not user.is_authenticated %}
-{% if not product.comments.all %}
-  No comments yet... <a href="{% url 'account_login'  %}">add comment</a>
-{% else %}
-  <a href="{% url 'account_login'  %}">add comment</a>
-{% for comment in product.comments.all %}
-  <strong>
-    <br> {{comment.author}} - {{comment.date_added}} <br>
-      <p>{{comment.body}}</p>
-  </strong>
-{% endfor %}
-{% endif %}
-{% endif %}
-</div> 
-</div>
-
-</div>
+            </div>
+        </div>
+    </div>
 </section>
+
+
+{% if user.is_authenticated %}
+      <section class="bg-secondary">
+        <div class="container my-5 py-5">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-12 col-lg-10">
+              <div class="card text-dark">
+                <div class="card-body p-4">
+
+                  {% if not product.comments.all %}
+                  <h4 class="mb-0">No comments yet... <a href="{% url 'comment' product.id %}">add comment</a></h4>
+                  {% else %}
+                  <h4 class="mb-0">Recent comments <a href="{% url 'comment' product.id %}">add comment</a></h4>
+                  {% endif %}
+
+                  <p class="fw-light mb-4 pb-2">Latest Comments by users</p>
+                  
+
+                  {% for comment in product.comments.all %}
+                  
+                  <div class="d-flex flex-start">
+
+                    <img class="rounded-circle shadow-1-strong me-3"src="{{ comment.author.profile.profile_pic.url }}" alt="avatar" width="60"height="60" />
+
+                  <div>
+                      <h6 class="fw-bold mb-1">{{comment.author}}</h6>
+                      <div class="d-flex align-items-center mb-3">
+                        <p class="mb-0">
+                          {{comment.date_added}}
+                        </p>
+                    <!-- edit -->
+                      </div>
+                      <p class="mb-0">
+                        {{comment.body}}
+                      </p>
+
+                    </div>
+
+                  </div><hr>
+                  {% endfor %}
+
+                </div>
+                  
+                
+      </section>
+
+      {% endif %}
+      {% if not user.is_authenticated %}
+
+      
+
+      <section class="bg-secondary">
+
+
+        <div class="container my-5 py-5">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-12 col-lg-10">
+              <div class="card text-dark">
+                <div class="card-body p-4">
+                  
+                  {% if not product.comments.all %}
+                  <h4 class="mb-0">No comments yet... <a href="{% url 'account_login'  %}">add comment</a></h4>
+                  {% else %}
+                  <h4 class="mb-0">Recent comments <a href="{% url 'account_login'  %}">add comment</a></h4>
+                  {% endif %}
+
+                  <p class="fw-light mb-4 pb-2">Latest Comments by users</p>
+                  
+
+                  {% for comment in product.comments.all %}
+                  
+                  <div class="d-flex flex-start">
+
+                    <img class="rounded-circle shadow-1-strong me-3"src="{{ comment.author.profile.profile_pic.url }}" alt="avatar" width="60"height="60" />
+
+                  <div>
+                      <h6 class="fw-bold mb-1">{{comment.author}}</h6>
+                      <div class="d-flex align-items-center mb-3">
+                        <p class="mb-0">
+                          {{comment.date_added}}
+                        </p>
+                    <!-- edit -->
+                      </div>
+                      <p class="mb-0">
+                        {{comment.body}}
+                      </p>
+
+                    </div>
+
+                  </div><hr>
+                  {% endfor %}
+
+                </div>
+              </div>
+            </div>
+
+            
+            
+             
+                  
+      {% endif %}
+                
+      </section>
+
+
+
+
 {% endblock content %}

@@ -37,6 +37,7 @@ class CartItem(models.Model):
     product = models.ForeignKey(Product,related_name='cartitem',on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     
+    
     def __str__(self):
         return f'{self.quantity} x {self.product.name} in {self.cart}'
     

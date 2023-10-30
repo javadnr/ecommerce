@@ -47,17 +47,7 @@ class CommentView(CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-# def comment(request,pk):
-#     product = Product.objects.get(id=pk)
-#     form = CommentForm(request.POST)
-     
-#     if form.is_valid():
-#         comment = form.save(commit=False)
-#         comment.post = product
-#         comment.author = request.user
-#         comment.save()
-        
-#     return render(request,'stuff/comment.html')
+
 
 
 def searchview(request):
