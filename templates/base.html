@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html dir="rtl" lang="fa">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   </head>
   <body class="d-flex flex-column min-vh-100">
-    <nav class="sticky-top navbar navbar-expand-lg bg-body-tertiary ">
+    <nav class="sticky-top navbar navbar-expand-lg bg-body-tertiary "style="opacity: .95">
       <div class="container">
         {% if user.is_authenticated %}
         <a class="navbar-brand" href="{% url 'profile' %}">{{user.username}}</a>
@@ -19,25 +19,26 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active " href="{% url 'list' %}">home</a>
+              <a class="nav-link active " href="{% url 'list' %}">خانه</a>
 
             </li>
-            <li class="nav-item">
-              {% if user.is_authenticated %}
-              <a class="nav-link active" aria-current="page" href="{% url 'account_logout' %}">log out</a>
-            </li>
-              {% else %}
+            {% if user.cart.products.all  %}
               <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'account_login' %}">login</a>
-              </li>
-              <a class="nav-link active" aria-current="page" href="{% url 'account_signup' %}">signup</a>
-              {% endif %}
-              {% if user.cart.products.all  %}
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'cart' %}">cart</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'cart' %}">کارت</a>
               </li>
                 
               {% endif %}  
+            <li class="nav-item">
+              {% if user.is_authenticated %}
+              <a class="nav-link active" aria-current="page" href="{% url 'account_logout' %}">خروج</a>
+            </li>
+              {% else %}
+              <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'account_login' %}">ورود</a>
+              </li>
+              <a class="nav-link active" aria-current="page" href="{% url 'account_signup' %}">ساخت اکانت</a>
+              {% endif %}
+              
           </ul>
           
           
@@ -45,8 +46,8 @@
           
           <form class="d-flex" role="search" method="GET" action="{% url 'search' %}">
             {% csrf_token %}
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched">
-          <button class="btn btn-outline-secondary" type="submit">Search</button>
+          <input class="form-control me-2" type="search" placeholder="جستجو" aria-label="Search" name="searched">
+          <button class="btn btn-outline-secondary" type="submit">جستجو</button>
           </form>
         
         </div>
@@ -60,7 +61,7 @@
     
   </body>
   <footer class="py-5 bg-dark mt-auto ">
-      <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+      <div class="container"><p class="m-0 text-center text-white">حقوق متعلق به &copy; جواد نام آور</p></div>
   </footer>
 
 </html>

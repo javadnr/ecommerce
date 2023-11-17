@@ -38,25 +38,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #my apps
-    'users',
-    'usrprof',
-    'stuff',
-    'serialize',
-    #django all auth
+    # my apps
+    'users.apps.UsersConfig',
+    'usrprof.apps.UsrprofConfig',
+    'stuff.apps.StuffConfig',
+    'serialize.apps.SerializeConfig',
+    # django all auth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    #crispy forms
+    # crispy forms
     'crispy_forms',
     'crispy_bootstrap5',
-    #comment app
-    
-    #add to cart app
-
-    #rest framework
+    # rest framework
     'rest_framework',
+    # extensions
+    'extensions',
     
 ]
 SITE_ID = 1
@@ -129,9 +127,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa-ir'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 

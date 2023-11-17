@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-<form action="" method="post">
-    <p>are you sure to delete the item?</p>
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">delete</button>
-</form>
+<div class="m-auto">
+    <div class="container">
+        <form action="" method="post">
+            <p>از حذف ایتم مطمعن هستید؟</p>
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn btn-danger" type="submit">delete</button>
+        </form>
+    </div>
+</div>
 {% endblock content %}

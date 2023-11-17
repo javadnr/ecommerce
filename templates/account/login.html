@@ -1,19 +1,23 @@
+{% extends "base.html" %}
 {% load i18n %}
 {% load socialaccount %}
 {% load account %}
 {% load crispy_forms_tags %}
+{% block content %}
+  
+<div class="m-auto">
+    <div class="container">
+            <h1>ورود</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form|crispy}}
+                <a href="{% url 'account_reset_password' %}">رمز را فراموش کرده ام</a> <br>
 
-
-
-    <h1>LOGIN</h1>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{form|crispy}}
-        <a href="{% url 'account_reset_password' %}">forget your password?</a> <br>
-
-        <button class="btn btn-secondary" type="submit" >Log In</button>
-        
-    </form> <hr>
-    <a class="btn btn-success" href="{% url 'account_signup' %}">Donnot have an account?Signup</a><br>
-    {% comment %} <a href="{% provider_login_url 'google' %}">signin with Google</a><br> {% endcomment %}
+                <button class="btn btn-success" type="submit" >ورود</button>
+                
+            </form> <hr>
+            <a class="btn btn-secondary" href="{% url 'account_signup' %}">اکانت ندارید؟بسازید</a><br>
+            {% comment %} <a href="{% provider_login_url 'google' %}">با گوگل وارد شوید</a><br>  {% endcomment %}
+    </div>
 </div>
+{% endblock content %}

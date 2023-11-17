@@ -21,8 +21,8 @@
           <div class="col-md-6">
               <h1 class="display-5 fw-bolder">{{product.name}} {% if user.is_superuser %}
 
-                <a class="btn btn-danger" href="{% url 'update_item' product.id %}">update</a>
-                <a class="btn btn-danger" href="{% url 'delete' product.id %}">delete</a>
+                <a class="btn btn-danger" href="{% url 'update_item' product.id %}">بروزرسانی</a>
+                <a class="btn btn-danger" href="{% url 'delete' product.id %}">حذف</a>
                 {%endif%}</h1>
               
               <div class="fs-5 mb-5">
@@ -32,7 +32,7 @@
               <p class="lead">{{ product.discription }}</p>
               <div class="d-flex">  
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                  <div class="text-center"><a class="btn btn-outline-secondary mt-auto" href="{% url 'add-to-cart' product.id %}">add to cart</a></div>
+                  <div class="text-center"><a class="btn btn-outline-secondary mt-auto" href="{% url 'add-to-cart' product.id %}">افزودت به کارت</a></div>
                     
               </div>
             </div>
@@ -50,12 +50,12 @@
                 <div class="card-body p-4">
 
                   {% if not product.comments.all %}
-                  <h4 class="mb-0">No comments yet... <a href="{% url 'comment' product.id %}">add comment</a></h4>
+                  <h4 class="mb-0">هنوز کامنتی نیست ... <a href="{% url 'comment' product.id %}">کامنت گذاشتن</a></h4>
                   {% else %}
-                  <h4 class="mb-0">Recent comments <a href="{% url 'comment' product.id %}">add comment</a></h4>
+                  <h4 class="mb-0">اخرین کامنت ها <a href="{% url 'comment' product.id %}">کامنت گذاشتن</a></h4>
                   {% endif %}
 
-                  <p class="fw-light mb-4 pb-2">Latest Comments by users</p>
+                  <p class="fw-light mb-4 pb-2"></p>
                   
 
                   {% for comment in product.comments.all %}
@@ -68,7 +68,7 @@
                       <h6 class="fw-bold mb-1">{{comment.author}}</h6>
                       <div class="d-flex align-items-center mb-3">
                         <p class="mb-0">
-                          {{comment.date_added}}
+                          {{comment.jdate_added}}
                         </p>
                     <!-- edit -->
                       </div>
